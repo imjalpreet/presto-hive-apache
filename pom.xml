@@ -122,6 +122,21 @@
                 <artifactId>jackson-core</artifactId>
                 <version>2.16.1</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.calcite</groupId>
+                <artifactId>calcite-core</artifactId>
+                <version>1.33.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>commons-compiler</artifactId>
+                <version>3.1.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>3.1.8</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -809,6 +824,11 @@
             <artifactId>jackson-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-core</artifactId>
+        </dependency>
+
         <!-- hadoop compilation dependency for CodecPool -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -911,6 +931,10 @@
                                 </excludes>
                             </artifactSet>
                             <relocations>
+                                <relocation>
+                                    <pattern>org.apache.calcite</pattern>
+                                    <shadedPattern>${shadeBase}.org.apache.calcite</shadedPattern>
+                                </relocation>
                                 <relocation>
                                     <pattern>com.google.protobuf</pattern>
                                     <shadedPattern>${shadeBase}.com.google.protobuf</shadedPattern>

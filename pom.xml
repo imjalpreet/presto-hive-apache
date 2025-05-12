@@ -57,6 +57,7 @@
         <dep.parquet.version>1.16.0</dep.parquet.version>
         <dep.protobuf.version>3.25.5</dep.protobuf.version>
         <dep.slf4j.version>2.0.16</dep.slf4j.version>
+        <datasketches.version>1.2.0</datasketches.version>
 
         <dep.central-publishing.version>0.8.0</dep.central-publishing.version>
     </properties>
@@ -137,6 +138,11 @@
                 <groupId>org.codehaus.janino</groupId>
                 <artifactId>janino</artifactId>
                 <version>3.1.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.datasketches</groupId>
+                <artifactId>datasketches-hive</artifactId>
+                <version>${datasketches.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -868,6 +874,21 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.datasketches</groupId>
+            <artifactId>datasketches-hive</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.datasketches</groupId>
+                    <artifactId>datasketches-java</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!-- hadoop compilation dependency for CodecPool -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -1146,6 +1167,12 @@
                                     <artifact>com.fasterxml.jackson.core:*</artifact>
                                     <excludes>
                                         <exclude>META-INF/services/**</exclude>
+                                        <exclude>META-INF/versions/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.datasketches:*</artifact>
+                                    <excludes>
                                         <exclude>META-INF/versions/**</exclude>
                                     </excludes>
                                 </filter>

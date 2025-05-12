@@ -56,6 +56,7 @@
         <dep.parquet.version>1.13.1</dep.parquet.version>
         <dep.protobuf.version>3.25.5</dep.protobuf.version>
         <dep.slf4j.version>1.7.25</dep.slf4j.version>
+        <datasketches.version>1.2.0</datasketches.version>
 
         <dep.nexus-staging-plugin.version>1.6.8</dep.nexus-staging-plugin.version>
     </properties>
@@ -136,6 +137,11 @@
                 <groupId>org.codehaus.janino</groupId>
                 <artifactId>janino</artifactId>
                 <version>3.1.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.datasketches</groupId>
+                <artifactId>datasketches-hive</artifactId>
+                <version>${datasketches.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -829,6 +835,17 @@
             <artifactId>calcite-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.datasketches</groupId>
+            <artifactId>datasketches-hive</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!-- hadoop compilation dependency for CodecPool -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -1111,6 +1128,12 @@
                                     <artifact>com.fasterxml.jackson.core:*</artifact>
                                     <excludes>
                                         <exclude>META-INF/services/**</exclude>
+                                        <exclude>META-INF/versions/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.datasketches:*</artifact>
+                                    <excludes>
                                         <exclude>META-INF/versions/**</exclude>
                                     </excludes>
                                 </filter>

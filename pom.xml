@@ -517,6 +517,18 @@
 
         <dependency>
             <groupId>org.apache.hive</groupId>
+            <artifactId>hive-parser</artifactId>
+            <version>${dep.hive.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.antlr</groupId>
+                    <artifactId>antlr-runtime</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hive</groupId>
             <artifactId>hive-udf</artifactId>
             <version>${dep.hive.version}</version>
         </dependency>
@@ -1095,6 +1107,12 @@
                                     <excludes>
                                         <exclude>hive-log4j2.properties</exclude>
                                         <exclude>parquet-logging.properties</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.hive:hive-parser</artifact>
+                                    <excludes>
+                                        <exclude>org/apache/hadoop/hive/ql/parse/HiveParser.class</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>

@@ -143,6 +143,11 @@
                 <artifactId>datasketches-hive</artifactId>
                 <version>${datasketches.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>3.6.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -917,6 +922,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -1027,12 +1037,28 @@
                                     <shadedPattern>${shadeBase}.com.google.thirdparty</shadedPattern>
                                 </relocation>
                                 <relocation>
+                                    <pattern>com.google.flatbuffers</pattern>
+                                    <shadedPattern>${shadeBase}.com.google.flatbuffers</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.uzaygezen.core</pattern>
+                                    <shadedPattern>${shadeBase}.com.google.uzaygezen.core</shadedPattern>
+                                </relocation>
+                                <relocation>
                                     <pattern>org.objectweb.asm</pattern>
                                     <shadedPattern>${shadeBase}.org.objectweb.asm</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.objenesis</pattern>
                                     <shadedPattern>${shadeBase}.org.objenesis</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.codehaus.commons</pattern>
+                                    <shadedPattern>${shadeBase}.org.codehaus.commons</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.codehaus.janino</pattern>
+                                    <shadedPattern>${shadeBase}.org.codehaus.janino</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.codehaus.jackson</pattern>
@@ -1081,6 +1107,74 @@
                                 <relocation>
                                     <pattern>org.slf4j</pattern>
                                     <shadedPattern>${shadeBase}.org.slf4j</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.amazonaws.secretsmanager.caching</pattern>
+                                    <shadedPattern>${shadeBase}.com.amazonaws.secretsmanager.caching</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.sun.jersey</pattern>
+                                    <shadedPattern>${shadeBase}.com.sun.jersey</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.yahoo.memory</pattern>
+                                    <shadedPattern>${shadeBase}.com.yahoo.memory</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.yahoo.sketches</pattern>
+                                    <shadedPattern>${shadeBase}.com.yahoo.sketches</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>io.netty.buffer</pattern>
+                                    <shadedPattern>${shadeBase}.io.netty.buffer</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.arrow</pattern>
+                                    <shadedPattern>${shadeBase}.org.apache.arrow</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.curator</pattern>
+                                    <shadedPattern>${shadeBase}.org.apache.curator</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.datasketches.hive</pattern>
+                                    <shadedPattern>${shadeBase}.org.apache.datasketches.hive</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apiguardian.api</pattern>
+                                    <shadedPattern>${shadeBase}.org.apiguardian.api</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.fusesource.jansi</pattern>
+                                    <shadedPattern>${shadeBase}.org.fusesource.jansi</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.jvnet.mimepull</pattern>
+                                    <shadedPattern>${shadeBase}.org.jvnet.mimepull</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.locationtech.proj4j</pattern>
+                                    <shadedPattern>${shadeBase}.org.locationtech.proj4j</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.pentaho.aggdes</pattern>
+                                    <shadedPattern>${shadeBase}.org.pentaho.aggdes</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.reflections</pattern>
+                                    <shadedPattern>${shadeBase}.org.reflections</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.stringtemplate.v4</pattern>
+                                    <shadedPattern>${shadeBase}.org.stringtemplate.v4</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.threeten.extra.chrono</pattern>
+                                    <shadedPattern>${shadeBase}.org.threeten.extra.chrono</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.yaml.snakeyaml</pattern>
+                                    <shadedPattern>${shadeBase}.org.yaml.snakeyaml</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
@@ -1135,6 +1229,13 @@
                                     </excludes>
                                 </filter>
                                 <filter>
+                                    <artifact>org.apache.hive:hive-standalone-metastore-common</artifact>
+                                    <excludes>
+                                        <exclude>saveVersion.sh</exclude>
+                                        <exclude>thrift-replacements.txt</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
                                     <artifact>org.apache.hive:hive-serde</artifact>
                                     <excludes>
                                         <exclude>org/apache/hadoop/hive/serde2/avro/AvroSerDe*.class</exclude>
@@ -1159,7 +1260,20 @@
                                     <artifact>org.apache.parquet:parquet-avro</artifact>
                                     <excludes>
                                         <exclude>stringBehavior.avsc</exclude>
+                                        <exclude>logicalType.avsc</exclude>
                                         <exclude>avro/org/apache/parquet/avro/StringBehaviorTest.java</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.parquet:parquet-format-structures</artifact>
+                                    <excludes>
+                                        <exclude>parquet.thrift</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.parquet:parquet-jackson</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/versions/**</exclude>
                                     </excludes>
                                 </filter>
                                 <filter>
@@ -1192,7 +1306,83 @@
                                     </excludes>
                                 </filter>
                                 <filter>
+                                    <artifact>com.fasterxml.jackson.dataformat:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/services/**</exclude>
+                                        <exclude>META-INF/versions/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>com.sun.jersey.contribs:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/services/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>com.sun.jersey:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/services/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
                                     <artifact>org.apache.datasketches:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/versions/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.calcite:calcite-core</artifact>
+                                    <excludes>
+                                        <exclude>codegen/**</exclude>
+                                        <exclude>META-INF/services/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.commons:commons-jexl3</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/services/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.commons:commons-math3</artifact>
+                                    <excludes>
+                                        <exclude>assets/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.arrow:*</artifact>
+                                    <excludes>
+                                        <exclude>arrow-git.properties</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.apache.calcite.avatica:avatica-core</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/services/**</exclude>
+                                        <exclude>*.proto</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>commons-configuration:commons-configuration</artifact>
+                                    <excludes>
+                                        <exclude>digesterRules.xml</exclude>
+                                        <exclude>*.dtd</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.codehaus.janino:janino</artifact>
+                                    <excludes>
+                                        <exclude>org.codehaus.commons.compiler.properties</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>commons-io:commons-io</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/versions/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>commons-io:commons-io</artifact>
                                     <excludes>
                                         <exclude>META-INF/versions/**</exclude>
                                     </excludes>

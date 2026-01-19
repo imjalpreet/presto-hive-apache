@@ -922,10 +922,6 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-simple</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>org.apache.datasketches</groupId>
-                    <artifactId>datasketches-java</artifactId>
-                </exclusion>
             </exclusions>
         </dependency>
 
@@ -1161,8 +1157,8 @@
                                     <shadedPattern>${shadeBase}.org.apache.curator</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>org.apache.datasketches.hive</pattern>
-                                    <shadedPattern>${shadeBase}.org.apache.datasketches.hive</shadedPattern>
+                                    <pattern>org.apache.datasketches</pattern>
+                                    <shadedPattern>${shadeBase}.org.apache.datasketches</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.apiguardian.api</pattern>

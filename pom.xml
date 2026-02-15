@@ -80,11 +80,6 @@
                 <version>2.16.0</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-common</artifactId>
-                <version>3.3.6</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.hadoop.thirdparty</groupId>
                 <artifactId>hadoop-shaded-protobuf_3_7</artifactId>
                 <version>1.1.1</version>
@@ -235,6 +230,10 @@
                 <exclusion>
                     <groupId>org.apache.hadoop</groupId>
                     <artifactId>hadoop-hdfs</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-client-api</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>com.github.joshelser</groupId>
@@ -1170,8 +1169,8 @@
                                     <shadedPattern>${shadeBase}.org.jvnet.mimepull</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>org.locationtech.proj4j</pattern>
-                                    <shadedPattern>${shadeBase}.org.locationtech.proj4j</shadedPattern>
+                                    <pattern>org.locationtech</pattern>
+                                    <shadedPattern>${shadeBase}.org.locationtech</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.pentaho.aggdes</pattern>
@@ -1280,6 +1279,7 @@
                                 <filter>
                                     <artifact>org.apache.parquet:parquet-avro</artifact>
                                     <excludes>
+                                        <exclude>car.avdl</exclude>
                                         <exclude>stringBehavior.avsc</exclude>
                                         <exclude>logicalType.avsc</exclude>
                                         <exclude>avro/org/apache/parquet/avro/StringBehaviorTest.java</exclude>
